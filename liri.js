@@ -67,8 +67,36 @@ var data = {
 		}
 	},
 
-	'move_this': function() {
-
+	'movie_this': function() {
+		var search;
+		if (!data.info) {
+			search = 'Mr. Nobody';
+		} else {
+			search = data.info;
+		}
+		// Replace spaces with '+' for the query string
+		search = search.split(' ').join('+');
+		var queryStr = 'http://www.omdbapi.com/?apikey=40e9cece&t=' + search + '&plot=short&tomatoes=true';
+		request(queryStr, function(error, response, body) {
+			// If the request was successful...
+			var data = JSON.parse(body);
+			if (!error && response.statusCode === 200) {
+				// Then log the body from the site!
+				var outputStr = '------------------------\n' +
+								'Movie Info:\n' + 
+								'------------------------\n\n' +
+								'Title: ' + data.Title + '\n' + 
+								'Year: ' + data.Year + '\n' +
+								'IMDB Rating: ' + data.Ratings[0].Value + '\n' +
+								'Rotten Tomatoes Rating: ' + data.Ratings[1].Value + '\n' +
+								'Country: ' + data.Country + '\n' +
+								'Language: ' + data.Language + '\n' +
+								'Plot: ' + data.Plot + '\n' +
+								'Actors: ' + data.Actors + '\n' +
+								'------------------------\n';
+				console.log(outputStr); 
+			}
+		});
 	},
 
 	'do_what_it_says': function() {
@@ -85,8 +113,8 @@ if (data.command === "spotify-this-song") {
 	data.spotify_this_song();
 }
 
-if (data.command === "move-this") {
-	data.move_this();
+if (data.command === "movie-this") {
+	data.movie_this();
 }
 
 if (data.command === "do-what-it-says") {
