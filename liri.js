@@ -29,6 +29,12 @@ var data = {
 							 '------------------------\n';
 			}
 			console.log(outputStr);
+			fs.appendFile("log.txt", outputStr, function(err) {
+				if(err) {
+					return console.log(err);
+				}
+				console.log("The file was updated");
+			}); 
 		});
 	},
 
@@ -47,7 +53,13 @@ var data = {
 								'Preview Link: ' + data.tracks.items[12].external_urls.spotify + '\n' +
 								'Album: ' + data.tracks.items[12].album.name + '\n' +
 								'------------------------\n';
-				console.log(outputStr); 
+				console.log(outputStr);
+				fs.appendFile("log.txt", outputStr, function(err) {
+					if(err) {
+						return console.log(err);
+					}
+					console.log("The file was updated");
+				});  
 			});
 		} else {	 
 			spotify.search({ type: 'track', query: data.info }, function(err, data) {
@@ -62,7 +74,13 @@ var data = {
 								'Preview Link: ' + data.tracks.items[0].external_urls.spotify + '\n' +
 								'Album: ' + data.tracks.items[0].album.name + '\n' +
 								'------------------------\n';
-				console.log(outputStr); 
+				console.log(outputStr);
+				fs.appendFile("log.txt", outputStr, function(err) {
+					if(err) {
+						return console.log(err);
+					}
+					console.log("The file was updated");
+				});  
 			});
 		}
 	},
@@ -94,7 +112,13 @@ var data = {
 								'Plot: ' + data.Plot + '\n' +
 								'Actors: ' + data.Actors + '\n' +
 								'------------------------\n';
-				console.log(outputStr); 
+				console.log(outputStr);
+				fs.appendFile("log.txt", outputStr, function(err) {
+					if(err) {
+						return console.log(err);
+					}
+					console.log("The file was updated");
+				}); 
 			}
 		});
 	},
