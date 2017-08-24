@@ -100,7 +100,27 @@ var data = {
 	},
 
 	'do_what_it_says': function() {
+		fs.readFile("random.txt", "utf-8", function(err, data1) {
+			if (err) {
+				return console.log(err);
+			}
+			var dataArray = data1.split(",");
+			data.command = dataArray[0].trim();
+			data.info = dataArray[1].trim();;
+			switch(data.command) {
+				case 'my-tweets':
+					data.my_tweets(); 
+					break;
 
+				case 'spotify-this-song':
+					data.spotify_this_song();
+					break;
+
+				case 'movie-this':
+					data.movie_this();
+					break;
+			}
+		});
 	}
 }
 
